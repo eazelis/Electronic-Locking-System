@@ -1,40 +1,18 @@
 # ELS
-Electronic Locking System in Proteus with C language firmware
 
-Documentation for main.c in the ELS Repository
-This is the documentation for the main.c file in the ELS repository. The program in this file appears to be written for a microcontroller (possibly the PIC18F4520) and involves working with an LCD display, reading input from switches, temperature sensing, and communicating through a USART terminal.
+This C program is a secure lock system for a vault controlled by a PIC18F4520 microcontroller. The system has the following features:
 
-Configuration and Global Variables
+<b>Configuration Settings: </b> The configuration settings define the system's behavior, such as disabling the watchdog timer, setting the oscillator mode, and enabling Master Clear.
 
-At the top of the file, the program sets up PIC configurations, such as oscillator mode, watchdog timer, low voltage programming, and debug mode. There are several included libraries for interfacing with specific microcontroller peripherals and performing various functions.
+<b>Definitions and Variables: </b> Constants and variables needed for the program are defined. These include various control commands for the LCD display, pin assignments for the vault lock and LEDs, and flags to track the status of the system (e.g., whether the pin is set, the vault is locked/unlocked, etc.).
 
-The program also defines commands for interacting with an LCD display, defines port assignments for various hardware components (like LEDs and a buzzer), and declares several global variables and flags for use throughout the program​1​.
+<b>Function Declarations: </b> A set of functions are declared that will be used to control the system's behavior. These include reading from and writing to EEPROM, setting and checking the PIN, handling failed attempts, displaying temperature, etc.
 
-Main Function
+<b>Main Function: </b> The main function initializes the system, sets up the ADC and USART, and enters an infinite loop where it continuously checks the temperature, handles inputs from a terminal, and processes keypad inputs.
 
-The main function first sets up the microcontroller's port configurations and initializes the LCD and ADC peripherals. It also initializes the USART for serial communication and sets up Timer0 for interrupt generation.
+<b>Function Definitions: The various functions declared earlier are defined here. For instance, calTemp() converts the ADC reading to a temperature and displays it on the LCD, triggerTerminal() handles the terminal inputs, EEPROM_READ() and EEPROM_WRITE() read from and write to EEPROM, respectively, and so on.
 
-The function then enters an infinite loop where it checks the temperature, checks for USART inputs, and reads inputs from switches connected to Port B​1​.
-
-Function Definitions
-
-There are several function definitions in the code, each performing specific tasks:
-
-timer5Sec(): This function checks the temperature and performs some actions if the system is on fire.
-
-onFire(): This function handles the situation when the system is on fire. It unlocks the vault, triggers the buzzer, and displays messages on the LCD and USART terminal.
-
-calTemp(): This function reads ADC values, converts them into a temperature reading, and stores the result as a series of ASCII digits.
-
-triggerTerminal(): This function handles USART terminal interactions. It prompts the user for actions and handles the input commands accordingly.
-
-termInpPIN(): This function handles PIN input from the USART terminal. It can either set a new PIN or check an entered PIN against a stored one.
-
-showTemp(): This function displays the current temperature on the LCD
-
-EEPROM_READ(): This function reads data from a specified address in the EEPROM
-
-EEPROM_Write(): This function writes data to a specified address in the EEPROM
+In summary, this program implements a secure lock for a vault, with a keypad for entering a PIN, an LCD display for feedback, and a terminal for additional commands. It also has an overheating protection feature that unlocks the vault and raises an alarm if the temperature exceeds a certain threshold.
 
 ![image](https://user-images.githubusercontent.com/95705759/154262027-6ddfba34-a43e-44f9-afd6-7d0bc270dfc9.png)
 PCB layout
